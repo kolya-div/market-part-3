@@ -312,6 +312,19 @@ def update_ui_asset(key):
     return jsonify({'success': True, 'asset': asset.to_dict()})
 
 
+@admin_bp.route('/ui-assets/<int:id>', methods=['PATCH'])
+@login_required
+@admin_required
+def patch_ui_asset(id):
+    """Update a UI asset by its integer ID."""
+    asset = UIAsset.query.get_or_404(id)
+    data = request.get_json() or {}
+    if 'value' in data:
+        asset.value = data['value']
+    db.session.commit()
+    return jsonify({'success': True, 'asset': asset.to_dict()})
+
+
 # ─── Orders ───────────────────────────────────────────────────────────────────
 @admin_bp.route('/orders', methods=['GET'])
 @login_required

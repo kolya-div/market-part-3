@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="checkout-wrapper">
+    <h1 class="section-header" style="text-align: center;" data-ui-key="checkout_title">{{ checkout_title |
+        default("Secure Checkout") }}</h1>
+
+    <div
+        style="text-align: center; margin-bottom: 24px; color: var(--success); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span>🔒</span><span data-ui-key="checkout_ssl">{{ checkout_ssl | default("SSL Secured Checkout") }}</span>
+    </div>
+
+    <form id="checkout-form">
+        <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Contact Detail</h2>
+        <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="checkout-email" class="form-input" required>
+        </div>
+
+        <h2 style="font-size: 18px; font-weight: 600; margin: 32px 0 16px;">Payment Information</h2>
+
+        <div class="form-group" style="position: relative;">
+            <label class="form-label">Card Number</label>
+            <input type="text" id="cc-number" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19"
+                required>
+            <div id="card-brand"
+                style="position: absolute; right: 16px; top: 38px; font-weight: bold; color: var(--accent);"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Cardholder Name</label>
+            <input type="text" id="cc-name" class="form-input" placeholder="JANE DOE" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+                <label class="form-label">Expiry Date</label>
+                <input type="text" id="cc-exp" class="form-input" placeholder="MM/YY" maxlength="5" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">CVV</label>
+                <input type="password" id="cc-cvv" class="form-input" placeholder="***" maxlength="4" required>
+            </div>
+        </div>
+
+        <button type="submit" id="checkout-submit" class="btn-primary"
+            style="min-height: 56px; font-size: 16px; margin-top: 16px;" disabled>Complete Order</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/checkout.js"></script>
+{% endblock %}

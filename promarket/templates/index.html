@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="hero-title" data-ui-key="hero_text">{{ hero_text | default("The Future of Tech is Here") }}</h1>
+    <p style="font-size: 18px; color: var(--muted); margin-bottom: 32px;">Discover the latest premium devices at
+        unbeatable prices.</p>
+    <button class="btn-primary" style="width: auto;"
+        onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+</section>
+
+<section id="catalog">
+    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Explore Catalog</h2>
+    </div>
+
+    <div class="cat-bar" id="category-filter">
+        <button class="cat-link active" data-category="">All Products</button>
+        <button class="cat-link" data-category="Smartphones">Smartphones</button>
+        <button class="cat-link" data-category="Laptops">Laptops</button>
+        <button class="cat-link" data-category="Audio">Audio</button>
+        <button class="cat-link" data-category="Accessories">Accessories</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-grid">
+        <!-- Rendered by products.js -->
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/products.js"></script>
+{% endblock %}

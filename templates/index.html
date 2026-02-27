@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElectroMarket - Premium Electronics</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Flask url_for dynamic linking -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 
 <body>
@@ -87,7 +86,7 @@
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                     </svg>
                 </button>
-                <button class="nav-btn" onclick="switchPage('profile')" title="My Profile">
+                <button class="nav-btn" onclick="switchPage('login')" title="My Profile">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
@@ -101,21 +100,55 @@
                     </svg>
                     <div class="cart-badge" id="cart-badge">0</div>
                 </button>
+                <button class="nav-btn hamburger-btn"
+                    onclick="document.getElementById('mobile-drawer').classList.add('active'); document.getElementById('mobile-overlay').classList.add('active');">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobile-overlay" class="overlay"
+        onclick="document.getElementById('mobile-drawer').classList.remove('active'); this.classList.remove('active');"
+        style="z-index: 240;"></div>
+
+    <!-- Mobile Hamburger Drawer -->
+    <div id="mobile-drawer" class="mobile-drawer">
+        <button class="mobile-drawer-close"
+            onclick="document.getElementById('mobile-drawer').classList.remove('active'); document.getElementById('mobile-overlay').classList.remove('active');">&times;</button>
+        <a href="#"
+            onclick="switchPage('home'); document.getElementById('mobile-drawer').classList.remove('active'); document.getElementById('mobile-overlay').classList.remove('active');">Home</a>
+        <a href="#"
+            onclick="switchPage('catalog'); document.getElementById('mobile-drawer').classList.remove('active'); document.getElementById('mobile-overlay').classList.remove('active');">Catalog</a>
+        <a href="#">Deals</a>
+        <a href="#">New Arrivals</a>
+
+        <div style="margin-top: 24px; font-size: 14px; font-weight: 600; color: #86868B;">Categories</div>
+        <a href="#" style="font-size: 15px; font-weight: 500;"
+            onclick="filterCategory(1, 'Smartphones')">Smartphones</a>
+        <a href="#" style="font-size: 15px; font-weight: 500;" onclick="filterCategory(2, 'Laptops & PCs')">Laptops &
+            PCs</a>
+        <a href="#" style="font-size: 15px; font-weight: 500;" onclick="filterCategory(4, 'Audio')">Audio</a>
+        <a href="#" style="font-size: 15px; font-weight: 500;"
+            onclick="filterCategory(8, 'Accessories')">Accessories</a>
+    </div>
+
     <!-- ===== CAT BAR ===== -->
     <div class="cat-bar">
         <div class="cat-inner">
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Smartphones</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Laptops & PCs</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Tablets</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Audio</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Smart Home</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Gaming</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Cameras</a>
-            <a href="#" class="cat-link" onclick="switchPage('catalog')">Accessories</a>
+            <a href="#" class="cat-link" onclick="filterCategory(1, 'Smartphones')">Smartphones</a>
+            <a href="#" class="cat-link" onclick="filterCategory(2, 'Laptops & PCs')">Laptops & PCs</a>
+            <a href="#" class="cat-link" onclick="filterCategory(3, 'Tablets')">Tablets</a>
+            <a href="#" class="cat-link" onclick="filterCategory(4, 'Audio')">Audio</a>
+            <a href="#" class="cat-link" onclick="filterCategory(5, 'Smart Home')">Smart Home</a>
+            <a href="#" class="cat-link" onclick="filterCategory(6, 'Gaming')">Gaming</a>
+            <a href="#" class="cat-link" onclick="filterCategory(7, 'Cameras')">Cameras</a>
+            <a href="#" class="cat-link" onclick="filterCategory(8, 'Accessories')">Accessories</a>
             <div class="sale-badge">⚡ Flash Sale - Up to 40% Off</div>
         </div>
     </div>
@@ -172,8 +205,7 @@
                         <div class="carousel-slide">
                             <div class="hero-inner">
                                 <div class="hero-grid">
-                                    <div class="hero-card hero-card-2"
-                                        style="background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);">
+                                    <div class="hero-card hero-card-2">
                                         <div class="hero-content">
                                             <span class="hero-badge badge-best"
                                                 style="background:#8b5cf6; color:white;">Staff Pick</span>
@@ -189,8 +221,7 @@
                                         <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=400&h=400"
                                             alt="iPad Pro">
                                     </div>
-                                    <div class="hero-card hero-card-1"
-                                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div class="hero-card hero-card-1">
                                         <div class="hero-content">
                                             <span class="hero-badge badge-new"
                                                 style="background:#ec4899; color:white;">Trending</span>
@@ -214,8 +245,7 @@
                         <div class="carousel-slide">
                             <div class="hero-inner">
                                 <div class="hero-grid">
-                                    <div class="hero-card hero-card-1"
-                                        style="background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);">
+                                    <div class="hero-card hero-card-1">
                                         <div class="hero-content">
                                             <span class="hero-badge badge-new"
                                                 style="background:white; color:#FF416C;">Hot Deal</span>
@@ -232,8 +262,7 @@
                                         <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=400&h=400"
                                             alt="iPhone 15 Pro">
                                     </div>
-                                    <div class="hero-card hero-card-2"
-                                        style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                    <div class="hero-card hero-card-2">
                                         <div class="hero-content">
                                             <span class="hero-badge badge-best"
                                                 style="background:#0F172A; color:white;">Clearance</span>
@@ -956,6 +985,420 @@
             </div>
         </div>
 
+        <!-- PAGE: PRODUCT DETAIL -->
+        <div class="page" id="page-product-detail">
+            <div class="container" style="padding: 40px 24px;">
+                <button class="btn-outline"
+                    style="margin-bottom: 24px; color: var(--gray-700); border-color: var(--border-color); background: var(--white);"
+                    onclick="switchPage('catalog')">&larr; Back to Catalog</button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+                    <!-- Left: Images -->
+                    <div
+                        style="background: var(--white); border-radius: 12px; padding: 40px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; height: 500px;">
+                        <img id="detail-img"
+                            src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=600&h=600"
+                            alt="Product Image" style="width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                    <!-- Right: Info -->
+                    <div>
+                        <div class="stock-tag in-stock" id="detail-stock" style="margin-bottom: 12px;">• In Stock</div>
+                        <h1 class="section-title" id="detail-title" style="font-size: 32px; margin-bottom: 12px;">iPhone
+                            15 Pro Max 256GB</h1>
+                        <div class="product-rating"
+                            style="margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
+                            <span class="stars" style="color: var(--warning);">★★★★★</span>
+                            <span class="rating-count" style="color: var(--gray-500);">(124 Reviews)</span>
+                        </div>
+                        <div class="price-main" id="detail-price"
+                            style="font-size: 32px; margin-bottom: 24px; font-weight: 800; color: var(--primary);">
+                            $1,199</div>
+                        <p class="product-desc" id="detail-desc"
+                            style="font-size: 15px; margin-bottom: 32px; line-height: 1.6; color: var(--gray-600);">The
+                            ultimate iPhone featuring a strong and light titanium design with new Action button, 48MP
+                            Main camera, and A17 Pro chip.</p>
+
+                        <div style="margin-bottom: 32px;">
+                            <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--gray-800);">Quantity</h4>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div
+                                    style="display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; background: var(--white);">
+                                    <button
+                                        style="padding: 12px 16px; background: none; border: none; cursor: pointer; color: var(--gray-600);">-</button>
+                                    <span style="padding: 0 16px; font-weight: 600; color: var(--gray-900);">1</span>
+                                    <button
+                                        style="padding: 12px 16px; background: none; border: none; cursor: pointer; color: var(--gray-600);">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 16px;">
+                            <button class="btn-primary" id="detail-add-cart"
+                                style="flex: 1; justify-content: center; font-size: 16px; padding: 16px;"
+                                onclick="window.showToast('Added to cart!');">Add to Cart</button>
+                            <button class="wish-btn"
+                                style="position: static; width: 54px; height: 54px; border-radius: 6px;"><svg width="20"
+                                    height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg></button>
+                        </div>
+
+                        <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-color);">
+                            <div class="feature-item" style="padding: 0; background: none; margin-bottom: 16px;">
+                                <svg class="feature-icon" style="width: 24px; height: 24px;" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"></rect>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                </svg>
+                                <div>
+                                    <div class="feature-title" style="color: var(--gray-800);">Fast Free Delivery</div>
+                                </div>
+                            </div>
+                            <div class="feature-item" style="padding: 0; background: none;">
+                                <svg class="feature-icon" style="width: 24px; height: 24px;" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <div>
+                                    <div class="feature-title" style="color: var(--gray-800);">30 Days Easy Return</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: CART -->
+        <div class="page" id="page-cart">
+            <div class="container" style="padding: 40px 24px;">
+                <h1 class="section-title" style="margin-bottom: 32px; font-size: 28px;">Shopping Cart</h1>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;">
+                    <!-- Cart Items List -->
+                    <div id="full-cart-items">
+                        <!-- Simulated Cart Items for Mockup -->
+                        <div class="cart-item"
+                            style="display: flex; gap: 16px; margin-bottom: 16px; background: var(--white); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <div class="cart-item-img"
+                                style="width: 80px; height: 80px; background: var(--gray-50); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=200&h=200"
+                                    style="width: 80%; height: 80%; object-fit: contain;">
+                            </div>
+                            <div class="cart-item-info" style="flex: 1;">
+                                <div class="cart-item-name"
+                                    style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">iPhone 15 Pro Max
+                                </div>
+                                <div class="cart-item-price"
+                                    style="font-size: 15px; color: var(--primary); font-weight: 700; margin-bottom: 12px;">
+                                    $1,199</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div class="cart-item-qty" style="display: flex; align-items: center; gap: 12px;">
+                                        <button class="qty-btn"
+                                            style="width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--white); cursor: pointer;">-</button>
+                                        <span class="qty-num" style="font-size: 14px; font-weight: 600;">1</span>
+                                        <button class="qty-btn"
+                                            style="width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--white); cursor: pointer;">+</button>
+                                    </div>
+                                    <div class="cart-item-remove"
+                                        style="font-size: 13px; color: var(--red); cursor: pointer; font-weight: 500;">
+                                        Remove</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Order Summary -->
+                    <div
+                        style="background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; height: fit-content; position: sticky; top: 100px;">
+                        <h2 style="font-size: 18px; margin-bottom: 24px; font-weight: 700;">Order Summary</h2>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 16px; color: var(--gray-600); font-size: 15px;">
+                            <span>Subtotal</span>
+                            <span id="cart-page-subtotal"
+                                style="color: var(--gray-900); font-weight: 500;">$1,199.00</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 16px; color: var(--gray-600); font-size: 15px;">
+                            <span>Shipping</span>
+                            <span style="color: var(--success); font-weight: 500;">Free</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 24px; color: var(--gray-600); font-size: 15px;">
+                            <span>Tax</span>
+                            <span style="color: var(--gray-900); font-weight: 500;">$95.92</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 32px; font-size: 20px; font-weight: 800; border-top: 1px solid var(--border-color); padding-top: 24px;">
+                            <span>Total</span>
+                            <span id="cart-page-total" style="color: var(--primary);">$1,294.92</span>
+                        </div>
+                        <button class="btn-primary"
+                            style="width: 100%; justify-content: center; font-size: 16px; padding: 16px;"
+                            onclick="switchPage('checkout')">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: CHECKOUT -->
+        <div class="page" id="page-checkout">
+            <div class="container" style="padding: 40px 24px;">
+                <h1 class="section-title" style="margin-bottom: 32px; font-size: 28px; text-align: center;">Checkout
+                </h1>
+                <div style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+                    <!-- Order Summary Match -->
+                    <div
+                        style="background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; box-shadow: var(--shadow-sm);">
+                        <h2 style="font-size: 18px; margin-bottom: 24px; font-weight: 700;">Order Summary</h2>
+                        <div id="checkout-items"
+                            style="margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--gray-600); font-size: 15px;">
+                            <span>Subtotal</span>
+                            <span id="checkout-subtotal" style="color: var(--gray-900); font-weight: 500;">$0.00</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--gray-600); font-size: 15px;">
+                            <span>Shipping</span>
+                            <span style="color: var(--success); font-weight: 500;">Free</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                            <span>Total</span>
+                            <span id="checkout-total" style="color: var(--primary);">$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Form -->
+                    <div
+                        style="background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; box-shadow: var(--shadow-md);">
+                        <div
+                            style="text-align: center; margin-bottom: 24px; color: var(--success); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span data-ui-key="checkout.ssl.badge">🔒 SSL Secured Checkout</span>
+                        </div>
+                        <form id="checkout-form" onsubmit="event.preventDefault(); submitCheckoutForm();"
+                            style="display: flex; flex-direction: column;">
+                            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px;">Contact Information</h2>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label class="form-label"
+                                    style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">Email
+                                    Address</label>
+                                <input type="email" id="checkout-email" class="checkout-input"
+                                    style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                    required placeholder="john@example.com">
+                            </div>
+
+                            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; margin-top: 32px;">
+                                Shipping Address</h2>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                <div>
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">First
+                                        Name</label>
+                                    <input type="text" id="checkout-fname" class="checkout-input"
+                                        style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                        required>
+                                </div>
+                                <div>
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">Last
+                                        Name</label>
+                                    <input type="text" id="checkout-lname" class="checkout-input"
+                                        style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label class="form-label"
+                                    style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">Address</label>
+                                <input type="text" id="checkout-address" class="checkout-input"
+                                    style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                    required>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+                                <div>
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">City</label>
+                                    <input type="text" id="checkout-city" class="checkout-input"
+                                        style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                        required>
+                                </div>
+                                <div>
+                                    <label class="form-label"
+                                        style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">ZIP
+                                        Code</label>
+                                    <input type="text" id="checkout-zip" class="checkout-input"
+                                        style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                        required>
+                                </div>
+                            </div>
+
+                            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; margin-top: 16px;">
+                                Payment Details</h2>
+                            <div
+                                style="border: 1px solid var(--primary); border-radius: 6px; padding: 20px; margin-bottom: 16px; background: var(--primary-light);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <label
+                                        style="display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--primary-dark);">
+                                        <input type="radio" checked name="payment"> Credit / Debit Card
+                                    </label>
+                                    <div style="display: flex; gap: 8px;">
+                                        <!-- Need generic SVG icons for Visa/Mastercard because external images might break -->
+                                        <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                                            <rect width="32" height="20" rx="4" fill="#1A1F71" />
+                                            <path
+                                                d="M11.5 14L13.5 6h2L13 14h-1.5zM22.5 6c-1.5 0-2.5.8-2.5 2 0 1.5 2 1.6 2 2.4 0 .4-.4.6-.9.6-.6 0-1.1-.1-1.6-.4l-.2 1.4c.5.2 1.2.4 1.9.4 1.7 0 2.6-.8 2.6-2.1 0-1.6-2-1.7-2-2.3 0-.3.3-.6.8-.6.5 0 1 .1 1.4.3l.2-1.3c-.4-.2-.9-.4-1.7-.4zM27.5 14h1.5l-1.4-8h-1.6l-2.4 5.7L22.4 6h-1.6l3.5 8h1.6l.8-4.2.8 4.2zM8.5 6l-1.8 5.4L6 6H4l2.5 8h1.8L10.5 6H8.5z"
+                                                fill="#fff" />
+                                        </svg>
+                                        <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+                                            <rect width="32" height="20" rx="4" fill="#222" />
+                                            <circle cx="12" cy="10" r="6" fill="#EB001B" />
+                                            <circle cx="20" cy="10" r="6" fill="#F79E1B" fill-opacity="0.9" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 12px;">
+                                    <div>
+                                        <input type="text" id="cc-name" class="checkout-input"
+                                            style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; background: var(--white);"
+                                            placeholder="Cardholder Name" required>
+                                        <div class="error-msg" id="cc-name-err"
+                                            style="color:var(--red); font-size:12px; display:none; margin-top:4px;">Name
+                                            is required</div>
+                                    </div>
+                                    <div>
+                                        <input type="text" id="cc-number" class="checkout-input"
+                                            style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; background: var(--white); font-family: monospace; font-size: 16px;"
+                                            placeholder="0000 0000 0000 0000" maxlength="19" required>
+                                        <div class="error-msg" id="cc-number-err"
+                                            style="color:var(--red); font-size:12px; display:none; margin-top:4px;">
+                                            Invalid card number</div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                        <div>
+                                            <input type="text" id="cc-exp" class="checkout-input"
+                                                style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; background: var(--white); font-family: monospace; font-size: 16px;"
+                                                placeholder="MM/YY" maxlength="5" required>
+                                            <div class="error-msg" id="cc-exp-err"
+                                                style="color:var(--red); font-size:12px; display:none; margin-top:4px;">
+                                                Invalid expiry date</div>
+                                        </div>
+                                        <div>
+                                            <input type="password" id="cc-cvc" class="checkout-input"
+                                                style="width: 100%; padding: 0 16px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; background: var(--white); font-family: monospace; font-size: 16px;"
+                                                placeholder="CVC" maxlength="4" required>
+                                            <div class="error-msg" id="cc-cvc-err"
+                                                style="color:var(--red); font-size:12px; display:none; margin-top:4px;">
+                                                Invalid CVC</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="checkout-submit-btn" class="btn-primary"
+                                style="width: 100%; justify-content: center; font-size: 16px; padding: 16px; min-height: 54px;"
+                                disabled data-ui-key="checkout.buttonLabel">Complete Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: ORDER CONFIRMED -->
+        <div class="page" id="page-order-confirmed">
+            <div class="container" style="padding: 80px 24px; text-align: center; max-width: 600px;">
+                <div
+                    style="width: 80px; height: 80px; background: var(--success); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 8px 16px rgba(34, 197, 94, 0.2);">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h1 class="section-title" style="margin-bottom: 16px; font-size: 36px; font-weight: 800;">Order
+                    Confirmed!</h1>
+                <p style="color: var(--gray-600); font-size: 16px; margin-bottom: 32px; line-height: 1.6;">Thank you for
+                    your purchase. Your order <strong style="color: var(--primary);">#EM-2026-8910</strong> has been
+                    received and is being processed.</p>
+
+                <div
+                    style="background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; margin-bottom: 32px; text-align: left; box-shadow: var(--shadow-subtle);">
+                    <h3 style="font-weight: 700; margin-bottom: 16px; font-size: 16px;">What happens next?</h3>
+                    <p style="color: var(--gray-600); font-size: 14px; margin-bottom: 0; line-height: 1.6;">You will
+                        receive an order confirmation email with details of your order and a link to track its progress
+                        once it ships.</p>
+                </div>
+
+                <button class="btn-primary" style="padding: 16px 32px; font-size: 16px; justify-content: center;"
+                    onclick="switchPage('home')">Continue Shopping</button>
+            </div>
+        </div>
+
+        <!-- PAGE: LOGIN -->
+        <div class="page" id="page-login">
+            <div class="auth-wrapper" style="padding: 80px 24px; display: flex; justify-content: center;">
+                <div class="auth-card"
+                    style="background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 48px 40px; width: 100%; max-width: 460px; box-shadow: var(--shadow-md);">
+                    <div style="text-align: center; margin-bottom: 32px;">
+                        <h2 class="section-title" style="font-size: 28px; margin-bottom: 12px;">Welcome Back</h2>
+                        <p class="section-sub" style="font-size: 15px;">Sign in to your ElectroMarket account</p>
+                    </div>
+                    <form
+                        onsubmit="event.preventDefault(); switchPage('profile'); window.showToast('Logged in successfully');"
+                        style="display: flex; flex-direction: column;">
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label class="form-label"
+                                style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">Email
+                                Address</label>
+                            <input type="email"
+                                style="width: 100%; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                required placeholder="Enter your email"
+                                onfocus="this.style.borderColor='var(--primary)'"
+                                onblur="this.style.borderColor='var(--border-color)'">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 24px;">
+                            <label class="form-label"
+                                style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700);">Password</label>
+                            <input type="password"
+                                style="width: 100%; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: border 0.2s;"
+                                required placeholder="••••••••" onfocus="this.style.borderColor='var(--primary)'"
+                                onblur="this.style.borderColor='var(--border-color)'">
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; font-size: 13px;">
+                            <label
+                                style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--gray-600);">
+                                <input type="checkbox" style="width: 16px; height: 16px; accent-color: var(--primary);">
+                                Remember me
+                            </label>
+                            <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">Forgot
+                                Password?</a>
+                        </div>
+                        <button type="submit" class="btn-primary"
+                            style="width: 100%; justify-content: center; font-size: 16px; padding: 16px;">Sign
+                            In</button>
+                    </form>
+                    <div style="margin-top: 32px; text-align: center; font-size: 14px; color: var(--gray-600);">
+                        Don't have an account? <a href="#"
+                            style="color: var(--primary); font-weight: 600; text-decoration: none;">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- PAGE 3: PROFILE -->
         <div class="page" id="page-profile">
             <div class="auth-wrapper">
@@ -1014,84 +1457,169 @@
 
         <!-- PAGE 5: ADMIN PANEL -->
         <div class="page" id="page-admin-panel">
-            <div class="admin-dashboard">
-                <div class="admin-sidebar">
-                    <h3 style="font-family:'Syne'; font-size:18px; color:white; margin-bottom:20px;">Electro Admin</h3>
-                    <a href="#" class="active">Dashboard</a>
-                    <a href="#">Products</a>
-                    <a href="#">Orders</a>
-                    <a href="#">Users</a>
-                    <div style="margin-top:auto;">
-                        <a href="#" onclick="switchPage('home')" style="color:var(--red);">Exit Panel</a>
+            <div class="admin-dashboard-titanium">
+                <aside class="admin-sidebar-titanium">
+                    <div class="admin-brand">Electro Admin</div>
+                    <nav class="admin-nav">
+                        <a href="#" class="active" onclick="switchAdminTab('dashboard')">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            Dashboard
+                        </a>
+                        <a href="#" onclick="switchAdminTab('products')">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                </path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                            Products
+                        </a>
+                        <a href="#" onclick="switchAdminTab('uiassets')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            Site Labels
+                        </a>
+                    </nav>
+                    <div class="admin-exit">
+                        <button onclick="switchPage('home')">Exit Panel</button>
                     </div>
-                </div>
-                <div class="admin-content">
-                    <div class="section-header">
-                        <div>
-                            <h2 class="section-title">Product Management</h2>
-                            <p class="section-sub">Add, Edit, or Restore products</p>
-                        </div>
-                        <button class="btn-primary" onclick="alert('Open Add Product Modal')">+ Add Product</button>
-                    </div>
+                </aside>
+                <main class="admin-main-titanium">
+                    <header class="admin-header-titanium">
+                        <h1 id="admin-page-title">Dashboard</h1>
+                        <div class="admin-avatar">A</div>
+                    </header>
+                    <div class="admin-content-titanium">
 
-                    <div class="admin-card">
-                        <h4 style="margin-bottom:16px;">Quick Add / Pricing Calculator</h4>
-                        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:16px;">
-                            <div class="form-group">
-                                <label class="form-label">Base Price ($)</label>
-                                <input type="number" id="base-price" class="form-input" placeholder="e.g. 1000">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Discount (%)</label>
-                                <input type="number" id="discount-percentage" class="form-input" placeholder="e.g. 15">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Final Price</label>
-                                <div id="final-price-display"
-                                    style="padding:12px; font-size:18px; font-weight:700; color:var(--green);">$0.00
+                        <!-- Dashboard View -->
+                        <div id="admin-view-dashboard" class="admin-view active">
+                            <div class="kpi-grid">
+                                <div class="kpi-card">
+                                    <div class="kpi-title">Total Sales</div>
+                                    <div class="kpi-value" id="kpi-sales">$0.00</div>
+                                    <div class="kpi-trend positive">+15% this week</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-title">Active Orders</div>
+                                    <div class="kpi-value" id="kpi-orders">0</div>
+                                    <div class="kpi-trend" id="kpi-orders-trend">0 pending, 0 processing</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-title">Stock Alerts</div>
+                                    <div class="kpi-value" id="kpi-stock" style="color:var(--red);">0</div>
+                                    <div class="kpi-trend">Items below threshold</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="admin-card">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>iPhone 15 Pro Max</td>
-                                    <td>$1,199</td>
-                                    <td>124</td>
-                                    <td><span style="color:var(--green); font-weight:600;">Active</span></td>
-                                    <td>
-                                        <button
-                                            style="color:var(--blue); border:none; background:none; cursor:pointer; margin-right:8px;">Edit</button>
-                                        <button
-                                            style="color:var(--red); border:none; background:none; cursor:pointer;">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Old Headphone</td>
-                                    <td>$99</td>
-                                    <td>0</td>
-                                    <td><span style="color:var(--gray-400); font-weight:600;">Deleted</span></td>
-                                    <td>
-                                        <button
-                                            style="color:var(--orange); border:none; background:none; cursor:pointer;">Restore</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <!-- Products View -->
+                        <div id="admin-view-products" class="admin-view" style="display:none;">
+                            <div class="admin-section-header">
+                                <h2>Product Management</h2>
+                                <button class="btn-titanium-primary" onclick="alert('Open Add Product Modal')">+ Add
+                                    Product</button>
+                            </div>
+                            <div class="admin-table-card">
+                                <table class="admin-table-titanium">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-product-tbody">
+                                        <!-- Products injected here -->
+                                        <tr>
+                                            <td colspan="5" style="text-align:center;">Loading products...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- UI Assets View -->
+                        <div id="admin-view-uiassets" class="admin-view" style="display:none;">
+                            <div class="admin-section-header">
+                                <h2>Site Content (UI Assets)</h2>
+                            </div>
+                            <p style="font-size: 14px; color: #86868B; margin-bottom: 24px;">Double-click a value to
+                                edit inline.</p>
+                            <div class="admin-table-card">
+                                <table class="admin-table-titanium">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Label</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-uiasset-tbody">
+                                        <!-- Assets injected here -->
+                                        <tr>
+                                            <td colspan="3" style="text-align:center;">Loading assets...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Add/Edit Product Modal -->
+                        <div id="admin-product-modal" class="overlay" style="z-index: 200;">
+                            <div
+                                style="background: white; width: 400px; max-width: 90%; margin: 100px auto; border-radius: 16px; padding: 24px; position: relative;">
+                                <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 24px;"
+                                    id="admin-modal-title">Edit Product</h2>
+                                <button
+                                    onclick="document.getElementById('admin-product-modal').classList.remove('active')"
+                                    style="position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+
+                                <form id="admin-product-form"
+                                    onsubmit="event.preventDefault(); window.showToast('Product saved successfully'); document.getElementById('admin-product-modal').classList.remove('active');">
+                                    <div style="margin-bottom: 16px;">
+                                        <label
+                                            style="display: block; font-size: 13px; font-weight: 600; color: #86868B; margin-bottom: 8px;">Product
+                                            Title</label>
+                                        <input type="text" id="admin-product-title"
+                                            style="width: 100%; padding: 12px; border: 1px solid #E5E5EA; border-radius: 8px; outline: none;"
+                                            required>
+                                    </div>
+                                    <div
+                                        style="margin-bottom: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                        <div>
+                                            <label
+                                                style="display: block; font-size: 13px; font-weight: 600; color: #86868B; margin-bottom: 8px;">Price
+                                                ($)</label>
+                                            <input type="number" id="admin-product-price"
+                                                style="width: 100%; padding: 12px; border: 1px solid #E5E5EA; border-radius: 8px; outline: none;"
+                                                required>
+                                        </div>
+                                        <div>
+                                            <label
+                                                style="display: block; font-size: 13px; font-weight: 600; color: #86868B; margin-bottom: 8px;">Stock</label>
+                                            <input type="number" id="admin-product-stock"
+                                                style="width: 100%; padding: 12px; border: 1px solid #E5E5EA; border-radius: 8px; outline: none;"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn-titanium-primary" style="width: 100%;">Save
+                                        Product</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </main>
             </div>
         </div>
 
@@ -1185,6 +1713,7 @@
     <!-- ===== JS ASSETS ===== -->
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
     <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
     <script src="{{ url_for('static', filename='js/ui-effects.js') }}"></script>
     <script>
         // Inline script to handle simple page routing UI

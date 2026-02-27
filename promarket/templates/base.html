@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site_title | default("ProMarket") }}</title>
+    <link rel="stylesheet" href="/static/css/components.css">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="/" class="nav-brand" data-ui-key="site_title">{{ site_title | default("ProMarket") }}</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/#catalog">Catalog</a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn" id="cart-btn">
+                    🛒 <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+                <button class="hamburger-btn" id="hamburger-btn">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide-in Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Populated via cart.js -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <button class="btn-primary" onclick="window.location.href='/checkout'">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <main class="container" style="padding-top: 40px; min-height: 80vh;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer
+        style="margin-top: 64px; border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted);">
+        <p data-ui-key="footer_text">{{ footer_text | default("© 2026 ProMarket. All rights reserved.") }}</p>
+    </footer>
+
+    <!-- Core App JS -->
+    <script src="/static/js/ui-config.js"></script>
+    <script src="/static/js/cart.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
