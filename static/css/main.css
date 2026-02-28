@@ -1,33 +1,57 @@
 /* Base styles, layouts, typography, root variables */
 :root {
-    --primary: #2563EB;
-    --primary-dark: #1D4ED8;
-    --primary-light: #EFF6FF;
-    --success: #22C55E;
-    --warning: #F59E0B;
-    --dark: #0F172A;
-    --text-primary: #0F172A;
-    --text-secondary: #64748B;
-    --card-bg: #FFFFFF;
-    --page-bg: #F8FAFC;
-    --border-color: #E2E8F0;
+    /* Premium Modern Palette */
+    --primary: #4F46E5;
+    /* Indigo-600 */
+    --primary-dark: #3730A3;
+    /* Indigo-800 */
+    --primary-light: #EEF2FF;
+    /* Indigo-50 */
 
-    --gray-50: #F8FAFC;
-    --gray-100: #F1F5F9;
-    --gray-200: #E2E8F0;
-    --gray-300: #CBD5E1;
-    --gray-400: #94A3B8;
-    --gray-500: #64748B;
-    --gray-600: #475569;
-    --gray-700: #334155;
-    --gray-800: #1E293B;
-    --gray-900: #0F172A;
+    --success: #10B981;
+    /* Emerald-500 */
+    --warning: #F59E0B;
+    /* Amber-500 */
+    --red: #EF4444;
+    /* Red-500 */
+
+    --dark: #1e1e24;
+    /* Deep dark */
+    --text-primary: #18181B;
+    /* Zinc-900 */
+    --text-secondary: #52525B;
+    /* Zinc-600 */
+
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --page-bg: #F4F4F5;
+    /* Zinc-100 */
+    --border-color: #E4E4E7;
+    /* Zinc-200 */
+
+    /* Grayscale */
+    --gray-50: #FAFAFA;
+    --gray-100: #F4F4F5;
+    --gray-200: #E4E4E7;
+    --gray-300: #D4D4D8;
+    --gray-400: #A1A1AA;
+    --gray-500: #71717A;
+    --gray-600: #52525B;
+    --gray-700: #3F3F46;
+    --gray-800: #27272A;
+    --gray-900: #18181B;
 
     --white: #FFFFFF;
 
+    /* Elevated Shadows */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    /* Softer drop shadow */
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -37,7 +61,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-primary);
     background: var(--page-bg);
     -webkit-font-smoothing: antialiased;
@@ -49,7 +73,7 @@ h2,
 h3,
 h4,
 h5 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-primary);
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -103,12 +127,12 @@ h5 {
     align-items: center;
     gap: 6px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--transition-smooth);
 }
 
 .view-all:hover {
     color: var(--primary-dark);
-    transform: translateX(2px);
+    transform: translateX(4px);
 }
 
 /* Common Layouts */

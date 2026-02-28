@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, jsonify, request
 from flask_login import login_required, current_user
 from models import db, Product, Category, BannerSlide, UIAsset, CartItem, Order, OrderItem
 from functools import lru_cache
-import json
 
 main_bp = Blueprint('main', __name__)
 
@@ -82,6 +81,24 @@ def search_products():
 def get_product(pid):
     product = Product.query.filter_by(id=pid, is_deleted=False).first_or_404()
     return jsonify({'success': True, 'product': product.to_dict()})
+
+
+@main_bp.route('/api/products/sale', methods=['GET'])
+def get_sale_products():
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 12, type=int)
+    
+    q = Product.query.filter_by(is_deleted=False, is_discount=True)
+    q = q.order_by(Product.id.desc())
+
+    products = q.paginate(page=page, per_page=per_page, error_out=False)
+    return jsonify({
+        'success': True,
+        'products': [p.to_dict() for p in products.items],
+        'total': products.total,
+        'pages': products.pages,
+        'page': page,
+    })
 
 
 # ─── Categories API ───────────────────────────────────────────────────────────

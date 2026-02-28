@@ -100,6 +100,9 @@ def register():
 
     if len(password) < 6:
         return jsonify({'success': False, 'message': 'Password must be at least 6 characters'}), 400
+        
+    if email and ('@' not in email or '.' not in email):
+        return jsonify({'success': False, 'message': 'Invalid email format'}), 400
 
     if User.query.filter_by(username=username).first():
         return jsonify({'success': False, 'message': 'Username already taken'}), 409
@@ -123,7 +126,7 @@ def login():
     password = data.get('password', '')
 
     is_blocked, attempts_left, blocked_until = _check_brute_force(ip, username)
-    if is_blocked:
+    if is_blocked and blocked_until:
         remaining = int((blocked_until - datetime.utcnow()).total_seconds() / 60) + 1
         return jsonify({
             'success': False,
@@ -165,7 +168,7 @@ def admin_login():
     password = data.get('password', '')
 
     is_blocked, attempts_left, blocked_until = _check_brute_force(ip, username)
-    if is_blocked:
+    if is_blocked and blocked_until:
         remaining = int((blocked_until - datetime.utcnow()).total_seconds() / 60) + 1
         return jsonify({
             'success': False,

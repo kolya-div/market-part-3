@@ -61,6 +61,8 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     old_price = db.Column(db.Float, nullable=True)
     discount = db.Column(db.Float, default=0.0)
+    is_discount = db.Column(db.Boolean, default=False)
+    discount_price = db.Column(db.Float, nullable=True)
     image = db.Column(db.String(500), nullable=True)
     brand = db.Column(db.String(100), nullable=True)
     stock = db.Column(db.Integer, default=10)
@@ -80,6 +82,8 @@ class Product(db.Model):
             'price': self.price,
             'old_price': self.old_price,
             'discount': self.discount,
+            'is_discount': self.is_discount,
+            'discount_price': self.discount_price,
             'image': self.image,
             'brand': self.brand,
             'stock': self.stock,

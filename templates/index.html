@@ -7,7 +7,7 @@
     <title>ElectroMarket - Premium Electronics</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Flask url_for dynamic linking -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
@@ -16,11 +16,11 @@
 <body>
 
     <!-- Overlay & Cart Drawer -->
-    <div class="overlay" id="overlay"></div>
-    <div class="cart-drawer" id="cart-drawer">
+    <div class="overlay" id="overlay" style="z-index: 900;"></div>
+    <div class="cart-drawer" id="cart-drawer" style="z-index: 1000;">
         <div class="cart-header">
             <div class="cart-title">Your Cart</div>
-            <button class="cart-close" id="close-cart">&times;</button>
+            <button class="cart-close" id="close-cart" style="pointer-events: auto;">&times;</button>
         </div>
         <div class="cart-items" id="cart-items-container">
             <!-- Items dynamically injected via JS -->
@@ -39,11 +39,11 @@
     <!-- ===== TOP BAR ===== -->
     <div class="topbar">
         <div class="topbar-inner">
-            <div class="topbar-left">
+            <div class="topbar-left" style="font-family: 'Outfit', sans-serif;">
                 <span>Free delivery on orders over $150</span>
                 <span>Support: 1-800-ELECTRO</span>
             </div>
-            <div class="topbar-right">
+            <div class="topbar-right" style="font-family: 'Outfit', sans-serif;">
                 <a href="#">Track Order</a>
                 <a href="#">Help Center</a>
                 <a href="#">EN / USD</a>
@@ -92,7 +92,7 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </button>
-                <button class="nav-btn" id="cart-btn">
+                <button class="nav-btn" id="cart-btn" style="pointer-events: auto; z-index: 105;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -160,7 +160,7 @@
         <div class="page active" id="page-home">
 
             <!-- ===== HERO CAROUSEL ===== -->
-            <section class="hero carousel-wrapper">
+            <section class="hero carousel-wrapper" style="position: relative; z-index: 10;">
                 <div class="carousel-container" id="hero-carousel">
                     <div class="carousel-track" id="carousel-track">
                         <!-- Slide 1 -->
@@ -172,8 +172,9 @@
                                             <span class="hero-badge badge-new">New Release</span>
                                             <h1 class="hero-title">MacBook Pro<br>M3 Max</h1>
                                             <p class="hero-sub">Mind-blowing. Head-turning.</p>
-                                            <button class="hero-btn" onclick="switchPage('catalog')">Shop Now <svg
-                                                    width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            <button class="hero-btn" onclick="switchPage('catalog')"
+                                                style="pointer-events: auto; position: relative; z-index: 20;">Shop Now
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="2">
                                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                                     <polyline points="12 5 19 12 12 19"></polyline>
